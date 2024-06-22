@@ -100,14 +100,15 @@ fun convertButton(g: gui)
         if (!st.hasMoreTokens()) break
         for ( num in 1..bacnum)
         {
-            t = st.nextToken() // skip 1 line
+            t = st.nextToken().trim { it <= ' ' }
             if (!st.hasMoreTokens()) break
-            t = st.nextToken()
+            tt += " $t"
+            t = st.nextToken().trim { it <= ' ' }
             tt += " $t"
             if (!st.hasMoreTokens()) break
         }
-        tt += "<br>"
-        t = st.nextToken() // skip 1 line
+        t = st.nextToken().trim { it <= ' ' } // skip 1 line
+        tt += "$t<br>"
     }
 
     g.text2.text = "<font size=2 face=\"&#65325;&#65331; &#12468;&#12471;&#12483;&#12463;\">$tt</font>"

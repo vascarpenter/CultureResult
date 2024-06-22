@@ -11,8 +11,10 @@ PSEUDOMONAS AERUGINOSA 3+
 感受性結果
 ABPC ≦2 S
 SBT/ABPC ≦2 S
-PIPC ≦4 S
-TAZ/PIPC ≦4 S
+PIPC ≦4 S 8 S
+TAZ/PIPC ≦4 S 8 S
+CEZ ≦4 S ≧64 R
+CMZ ≦1 S
 ```
 
 - ver 0.1 20240606 first release
