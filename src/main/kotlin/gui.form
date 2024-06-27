@@ -64,7 +64,7 @@
         </constraints>
         <properties>
           <font name="Dialog" size="10" style="0"/>
-          <text value="培養同定から感受性薬剤表の最後までの範囲をコピーしてから変換ボタンを押してください"/>
+          <text value="培養結果ウィンドウでCTRL+A CTRL+Cしてから変換ボタンを押してください"/>
         </properties>
       </component>
     </children>

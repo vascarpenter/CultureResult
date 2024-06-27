@@ -15,10 +15,11 @@ import javax.swing.text.html.HTMLDocument
 
 //ver 0.1 20240606 first release
 //ver 0.2 20240622 for result with many bacteria
+//ver 0.3 培養結果ウィンドウでCTRL+A CTRL+Cしてから変換ボタンを押す仕様に変更, その他、連絡情報
 
 fun main()
 {
-    val f = JFrame("Culture Result Rewriter 0.2")
+    val f = JFrame("Culture Result Rewriter 0.3")
     val g = gui()
     UIManager.put("OptionPane.messageFont", Font("Dialog", Font.PLAIN, 12))
     UIManager.put("OptionPane.buttonFont", Font("Dialog", Font.PLAIN, 12))
@@ -47,7 +48,7 @@ fun main()
  */
 fun notCultureData(g: gui)
 {
-    g.text2.text = "<html>培養同定から感受性薬剤表の最後までの範囲をコピーしてから変換ボタンを押してください。</html>"
+    g.text2.text = "<html>培養結果ウィンドウでCTRL+A CTRL+Cしてから変換ボタンを押してください</html>"
 }
 
 fun convertButton(g: gui)
@@ -60,8 +61,14 @@ fun convertButton(g: gui)
         notCultureData(g)
         return
     }
-    var t = st.nextToken().trim { it <= ' ' }
-    if(!t.startsWith("培養同定"))
+
+    var t = ""
+    while(st.hasMoreTokens())
+    {
+        t = st.nextToken().trim { it <= ' ' }
+        if(t.startsWith("培養同定"))    break
+    }
+    if (!st.hasMoreTokens())
     {
         notCultureData(g)
         return
@@ -109,6 +116,25 @@ fun convertButton(g: gui)
         }
         t = st.nextToken().trim { it <= ' ' } // skip 1 line
         tt += "$t<br>"
+    }
+
+    // 追加情報の追加
+    while (st.hasMoreTokens())
+    {
+        t = st.nextToken().trim { it <= ' ' }
+        if(t=="") continue
+        if(t.startsWith("連絡情報"))
+        {
+            t = t.substring(4) // 連絡情報の文字列削除
+            tt += "$t<br>"
+            continue
+        }
+        if(t.startsWith("肺炎球菌"))
+        {
+            tt += "$t<br>"
+            continue
+        }
+
     }
 
     g.text2.text = "<font size=2 face=\"&#65325;&#65331; &#12468;&#12471;&#12483;&#12463;\">$tt</font>"
