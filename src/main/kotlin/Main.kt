@@ -1,8 +1,9 @@
+@file:Suppress("DEPRECATION")
+
 import org.jsoup.Jsoup
 import java.awt.Font
 import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
-import java.awt.datatransfer.StringSelection
 import java.awt.datatransfer.Transferable
 import java.awt.datatransfer.UnsupportedFlavorException
 import java.io.*
@@ -62,7 +63,7 @@ fun convertButton(g: gui)
         return
     }
 
-    var t = ""
+    var t: String
     while(st.hasMoreTokens())
     {
         t = st.nextToken().trim { it <= ' ' }
@@ -217,7 +218,7 @@ fun setClipboardHTMLString(text: String)
     val t: Transferable = HtmlSelection(text)
     clip.setContents(t, null)
 }
-
+/*
 fun setClipboardString(text: String)
 {
     val kit = Toolkit.getDefaultToolkit()
@@ -225,6 +226,7 @@ fun setClipboardString(text: String)
     val ss = StringSelection(text)
     clip.setContents(ss, ss)
 }
+*/
 
 fun getClipboardString(): String
 {
